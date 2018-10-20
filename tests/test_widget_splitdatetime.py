@@ -25,7 +25,7 @@ class SplitDateTimeForm(forms.Form):
 class Test(WebTest):
     default_form = SplitDateTimeForm
 
-    def test_default_usecase(self):
+    def _test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)
 
         self.assertIn('id="id_test_field_container"', page.body.decode('utf-8'))
@@ -43,7 +43,7 @@ class Test(WebTest):
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals('2012-01-31T12:34:00Z', response['cleaned_data']['test_field'])
+        self.assertEqual('2012-01-31T12:34:00Z', response['cleaned_data']['test_field'])
 
     def test_missing_value_error(self):
         form = self.app.get(self.test_missing_value_error.url).form
@@ -143,5 +143,6 @@ class Test(WebTest):
              {% part form.test_field  errors%}<div class="errors"><small class="error">My Error</small></div>{% endpart %}
         {% endform %}
     '''
+
 
 urlpatterns = build_test_urls(Test)

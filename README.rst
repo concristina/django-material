@@ -2,7 +2,7 @@
 Django Material
 ===============
 
-Material design for Django Forms and Admin. Template driven.
+Material design for Django.
 
 .. image:: https://img.shields.io/pypi/v/django-material.svg
     :target: https://pypi.python.org/pypi/django-material
@@ -20,9 +20,12 @@ Material design for Django Forms and Admin. Template driven.
    :alt: Join the chat at https://gitter.im/viewflow/django-material
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Django-Material works with Django 1.8/1.9/1.10/1.11
+
+- Django-Material 1.2.x compatible Django 1.11/2.0
+- Django-Material 1.1.x compatible Django 1.8/1.9/1.10/1.11
 
 Django-Material 1.x branch going to be supported till Django 1.8 lifetime (April 2018)
+
 
 Tested with:
 
@@ -38,9 +41,7 @@ Overview
   * Easy redefinition of particular fields rendering
   * Complex form layout support
 
-- Frontend - Quick starter template for modular applications development
-
-- Admin - Material-designed django admin
+- Frontend - Quick starter template for modular admin-line applications development
 
 .. image:: .screen.png
    :width: 400px
@@ -51,7 +52,7 @@ Demo
 
 http://forms.viewflow.io/
 
-To checkout and run open source demo version localy, you need to have
+To checkout and run open source demo version locally, you need to have
 `git <https://git-scm.com/>`_ and `tox
 <https://tox.readthedocs.io/en/latest/>`_ tools installed.
 
@@ -84,13 +85,12 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.0.0 2017-05-29 - Stable
--------------------------
+1.3.0 2018-08-23
+----------------
 
-- Django 1.11 support
-- Update MaterializeCSS to 0.98.2
-- Fix missing badges in shipped MaterializeCSS build
-- Localization added: German/French/Spainish/Korean/Chinese
-- Forms - Fix allows to use html in a `help_text` of widgets
-- Frontend - Improved Login/Logout/403/404/500 service screen templates
-- Admin - fix application list layout
+- Django 2.1 compatibility
+- Conform select multiple attribute rendering
+- Fix multiple and clearable file inputs
+- Support for field.disabled
+- [PRO] Improve custom columns ordering handing
+- [PRO] Allow to select object from different pages in a list view

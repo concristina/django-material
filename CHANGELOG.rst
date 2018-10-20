@@ -1,5 +1,62 @@
-1.0.0 2017-05-29 - Stable
--------------------------
+1.3.0 2018-08-23
+----------------
+
+- Django 2.1 compatibility
+- Conform select multiple attribute rendering
+- Fix multiple and clearable file inputs
+- Support for field.disabled
+- [PRO] Improve custom columns ordering handing
+- [PRO] Allow to select object from different pages in a list view
+
+1.2.5 2018-05-07
+----------------
+
+- Fix pre-build themes
+
+
+1.2.4 2018-05-02
+----------------
+
+- Upgrade to Materialize 1.0.0.rc.1
+
+
+1.2.3 2018-04-19
+----------------
+
+- Upgrade to Materialize 1.0.0.beta
+- [PRO] do not show clear label for ajax fields
+- [PRO] trigger js change events on autocomplete
+
+
+1.2.2 2017-01-11
+----------------
+
+- Materialize 1.0.0.alpha3
+- [PRO] Fix ajax multi-select widget
+
+
+1.2.0 2017-12-20
+----------------
+
+- Materialize 1.0.0.alpha2
+- Django 2.0 support
+- Drop compatibility with Django 1.8/1.9/1.10
+- Drop Material Admin
+
+
+1.1.0 2017-10-27
+----------------
+
+- Update MaterializeCSS to 0.100.2
+- Forms - Localize DateTime picker
+- Forms - Add clear button on ajax autocomplete fields
+- Frontend - Allow to set ordering in the list view from viewset
+- Frontend - Fix permission check for the create view
+- Admin - Fix inline formset errors
+- Admin - Add file download link on the file fields
+
+1.0.0 2017-05-29
+----------------
 
 - Django 1.11 support
 - Update MaterializeCSS to 0.98.2

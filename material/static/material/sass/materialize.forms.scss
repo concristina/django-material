@@ -23,10 +23,11 @@ form .error {
 
 /* INPUT FIELD */
 .input-field {
+    margin-bottom: 0;
     label {
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: calc(100% - 21px);
+        // width: calc(100% - 21px);
         overflow: hidden;
     }
 
@@ -50,6 +51,20 @@ form .error {
         -moz-appearance: textfield;
     }
 
+    .input-field-action {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #555;
+        padding: 0 0.75rem;
+        line-height: 3rem;
+        background: white;
+        
+        i.material-icons {
+            vertical-align: middle;
+        }
+    }
+
     ::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
@@ -61,7 +76,7 @@ form .error {
 
 input:-webkit-autofill {
     +label {
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
         transform: translateY(-140%);
     }
 }
@@ -97,6 +112,12 @@ select.material-ignore {
 
         input.select-dropdown {
             margin-top: -7px;
+        }
+
+        .caret {
+            z-index: 0;
+            cursor: pointer;
+            pointer-events: none;
         }
     }
 }
@@ -169,8 +190,10 @@ select.material-ignore {
 
 .file-field-clear {
     float:right;
+    margin-top: 15px;
+    margin-left: 6px;
     label {
-        margin-right:25px;
+        margin-right:5px;
         width: auto;
     }
 }

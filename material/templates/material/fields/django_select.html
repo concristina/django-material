@@ -1,5 +1,5 @@
 {% load l10n material_form material_form_internal %}
-{% part bound_field.field %}<div class="row">
+{% part bound_field.field %}<{{ field.widget.component|default:'dmc-select' }}><div class="row">
     <div{% attrs bound_field 'group' %}
         id="id_{{ bound_field.html_name }}_container"
         class="select-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
@@ -14,6 +14,7 @@
             id="id_{{ bound_field.html_name }}"
             name="{{ bound_field.html_name }}"
             {% if bound_field.errors %}class="invalid"{% endif %}
+            {% if field.disabled %}disabled{% endif %}
         {% endattrs %}>
             {% part field options %}{% for group, items in bound_field|select_options %}
             {% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}
@@ -28,4 +29,4 @@
             {% include  'material/field_errors.html' %}
         {% endif %}{% endpart %}{{ hidden_initial }}
     </div>
-</div>{% endpart %}
+</div></{{ field.widget.component|default:'dmc-select' }}>{% endpart %}

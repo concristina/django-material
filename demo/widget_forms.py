@@ -6,7 +6,7 @@ from decimal import Decimal
 from django.contrib.auth.models import Permission
 from django.core.validators import MaxLengthValidator
 from django.core.files import File
-from django.forms.extras.widgets import SelectDateWidget
+from django.forms.widgets import SelectDateWidget
 from django.template import Template
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
@@ -33,6 +33,7 @@ class BooleanFieldForm(forms.Form):
 
     field1 = forms.BooleanField(help_text='default')
     field2 = forms.BooleanField(help_text='initial value', initial=True)
+    field3 = forms.BooleanField(help_text='disabled', disabled=True, required=False)
 
 
 class CharFieldForm(forms.Form):
@@ -42,6 +43,7 @@ class CharFieldForm(forms.Form):
     field2 = forms.CharField(help_text='initial value', initial="Initial value")
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
     field4 = forms.CharField(help_text='prefix')
+    field5 = forms.CharField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -76,6 +78,7 @@ class ChoiceFieldForm(forms.Form):
     field5 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field6 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
     field7 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
+    field8 = forms.ChoiceField(help_text='disabled', choices=CHOICES, initial=3, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -91,6 +94,7 @@ class DateFieldForm(forms.Form):
     field2 = forms.DateField(help_text='initial value', initial=timezone.now)
     field3 = forms.DateField(help_text='custom input format', input_formats=['%d %b, %Y'])
     field4 = forms.DateField(help_text='prefix')
+    field5 = forms.DateField(help_text='disabled', initial=timezone.now, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -106,6 +110,7 @@ class DateTimeFieldForm(forms.Form):
     field2 = forms.DateTimeField(help_text='initial value', initial=timezone.now)
     field3 = forms.DateTimeField(help_text='custom input format', input_formats=['%d %b, %Y %H:%M'])
     field4 = forms.DateTimeField(help_text='prefix')
+    field5 = forms.DateTimeField(help_text='disabled', initial=timezone.now, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -122,6 +127,7 @@ class DecimalFieldForm(forms.Form):
     field3 = forms.DecimalField(help_text='value between 5-10', min_value=5, max_value=10)
     field4 = forms.DecimalField(help_text='digits restriction 99.999', max_digits=5, decimal_places=3)
     field5 = forms.DecimalField(help_text='prefix')
+    field6 = forms.DecimalField(help_text='disabled', initial=Decimal('3.141592'), disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -136,6 +142,11 @@ class DurationFieldForm(forms.Form):
     field1 = forms.DurationField(help_text='default')
     field2 = forms.DurationField(help_text='initial value', initial=timedelta(minutes=1, seconds=12))
     field3 = forms.DurationField(help_text='prefix')
+    field4 = forms.DurationField(
+        help_text='disabled',
+        initial=timedelta(seconds=1),
+        disabled=True,
+        required=False)
 
     template = Template("""
     {% form %}
@@ -151,6 +162,7 @@ class EmailFieldForm(forms.Form):
     field2 = forms.EmailField(help_text='initial value', initial='john@doe.com')
     field3 = forms.EmailField(help_text='length between 10-20', min_length=10, max_length=20)
     field4 = forms.EmailField(help_text='prefix')
+    field5 = forms.EmailField(help_text='disabled', initial='admin@admin.com', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -165,6 +177,8 @@ class FileFieldForm(forms.Form):
     field1 = forms.FileField(help_text='default')
     field2 = forms.FileField(help_text='initial value', initial=FakeFieldFile())
     field3 = forms.FileField(help_text='optional', required=False, initial=FakeFieldFile())
+    field4 = forms.FileField(help_text='multiple', widget=forms.FileInput(attrs={'multiple': True}))
+    field5 = forms.FileField(help_text='disabled', disabled=True, required=False)
 
 
 class FilePathFieldForm(forms.Form):
@@ -177,6 +191,7 @@ class FilePathFieldForm(forms.Form):
                                  recursive=True, allow_folders=True, allow_files=False, match='templates')
 
     field4 = forms.FilePathField(help_text='prefix', path=os.path.dirname(__file__), required=False)
+    field5 = forms.FilePathField(help_text='disabled', path=os.path.dirname(__file__), disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -192,6 +207,7 @@ class FloatFieldForm(forms.Form):
     field2 = forms.FloatField(help_text='initial value', initial=2.718282)
     field3 = forms.FloatField(help_text='value between 5-10', min_value=5, max_value=10)
     field4 = forms.FloatField(help_text='prefix')
+    field5 = forms.FloatField(help_text='disabled', initial=3.145159, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -207,6 +223,7 @@ class ImageFieldForm(forms.Form):
     field2 = forms.ImageField(help_text='initial value',
                               initial=File(open(os.path.join(os.path.dirname(forms.__file__),
                                                              'static', 'img', 'logo.png')), 'logo.png'))
+    field3 = forms.ImageField(help_text='disabled', disabled=True, required=False)
 
 
 class IntegerFieldForm(forms.Form):
@@ -218,6 +235,7 @@ class IntegerFieldForm(forms.Form):
     field4 = forms.IntegerField(help_text='prefix')
     field5 = forms.IntegerField(
         help_text="range", widget=forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100'}))
+    field6 = forms.IntegerField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -235,6 +253,7 @@ class GenericIPAddressFieldForm(forms.Form):
     field3 = forms.GenericIPAddressField(help_text='IPv4 only', protocol='IPv4')
     field4 = forms.GenericIPAddressField(help_text='IPv6 only', protocol='IPv6')
     field5 = forms.GenericIPAddressField(help_text='prefix')
+    field6 = forms.GenericIPAddressField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -263,6 +282,7 @@ class MultipleChoiceFieldForm(forms.Form):
     field4 = forms.MultipleChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field5 = forms.TypedMultipleChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
     field6 = forms.MultipleChoiceField(help_text='prefix', choices=CHOICES)
+    field7 = forms.MultipleChoiceField(help_text='disabled', choices=CHOICES, initial=[2, 3], disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -276,6 +296,7 @@ class NullBooleanFieldForm(forms.Form):
 
     field1 = forms.NullBooleanField(help_text='default')
     field2 = forms.NullBooleanField(help_text='initial value', initial=True)
+    field3 = forms.NullBooleanField(help_text='disabled', initial=False, disabled=True, required=False)
 
 
 class RegexFieldForm(forms.Form):
@@ -285,6 +306,7 @@ class RegexFieldForm(forms.Form):
     field2 = forms.RegexField(help_text='initial value [regex=test\d]', initial='test1', regex='test\d')
     field3 = forms.RegexField(help_text='length between 5-10 [regex=.*]', regex='.*', min_length=5, max_length=10)
     field4 = forms.RegexField(help_text='prefix [regex=.*]', regex='.*')
+    field5 = forms.RegexField(help_text='disabled', regex='.*', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -299,6 +321,7 @@ class SlugFieldForm(forms.Form):
     field1 = forms.SlugField(help_text='default')
     field2 = forms.SlugField(help_text='initial value', initial="initial_value")
     field3 = forms.SlugField(help_text='prefix')
+    field4 = forms.SlugField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -314,6 +337,7 @@ class TimeFieldForm(forms.Form):
     field2 = forms.TimeField(help_text='initial value', initial=timezone.now)
     field3 = forms.TimeField(help_text='custom input format', input_formats=['%H:%M'])
     field4 = forms.TimeField(help_text='prefix')
+    field5 = forms.TimeField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -329,6 +353,7 @@ class URLFieldForm(forms.Form):
     field2 = forms.URLField(help_text='initial value', initial="http://viewflow.io")
     field3 = forms.URLField(help_text='length between 10-100', min_length=10, max_length=100)
     field4 = forms.URLField(help_text='prefix')
+    field5 = forms.URLField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -343,6 +368,7 @@ class UUIDField(forms.Form):
     field1 = forms.UUIDField(help_text='default')
     field2 = forms.UUIDField(help_text='initial value', initial=uuid.uuid4())
     field3 = forms.UUIDField(help_text='prefix')
+    field4 = forms.UUIDField(help_text='disabled', disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -356,6 +382,9 @@ class ComboFieldForm(forms.Form):
 
     field1 = forms.ComboField(help_text='reference sample',
                               fields=[forms.CharField(max_length=20), forms.EmailField()])
+    field2 = forms.ComboField(
+        help_text='disabled', disabled=True, required=False,
+        fields=[forms.CharField(max_length=20), forms.EmailField()])
 
 
 class SplitDateTimeFieldForm(forms.Form):
@@ -367,6 +396,7 @@ class SplitDateTimeFieldForm(forms.Form):
         help_text='custom input format',
         input_date_formats=['%d %b, %Y'],
         input_time_formats=['%H:%M:%S'])
+    field3 = forms.SplitDateTimeField(help_text='disabled', initial=timezone.now, disabled=True, required=False)
 
 
 class ModelChoiceFieldForm(forms.Form):
@@ -380,6 +410,7 @@ class ModelChoiceFieldForm(forms.Form):
     field4 = forms.ModelChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
                                     to_field_name='codename')
     field5 = forms.ModelChoiceField(help_text='prefix', queryset=Permission.objects.all())
+    field6 = forms.ModelChoiceField(help_text='disabled', queryset=Permission.objects.all(), disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -397,6 +428,7 @@ class ModelMultipleChoiceFieldForm(forms.Form):
     field3 = forms.ModelMultipleChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
                                             to_field_name='name')
     field4 = forms.ModelMultipleChoiceField(help_text='prefix', queryset=Permission.objects.all())
+    field5 = forms.ModelMultipleChoiceField(help_text='disabled', queryset=Permission.objects.all(), disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -419,6 +451,7 @@ class PasswordInputForm(forms.Form):
     field4 = forms.CharField(help_text='render value',
                              widget=forms.PasswordInput(render_value=True))
     field5 = forms.CharField(help_text='prefix', widget=forms.PasswordInput)
+    field6 = forms.CharField(help_text='disabled', widget=forms.PasswordInput, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -444,6 +477,7 @@ class TextareaForm(forms.Form):
     field4 = forms.CharField(help_text='soft max length 150', widget=forms.Textarea,
                              validators=[MaxLengthValidator(150)])
     field5 = forms.CharField(help_text='prefix', widget=forms.Textarea)
+    field6 = forms.CharField(help_text='disabled', widget=forms.Textarea, disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -470,6 +504,9 @@ class RadioSelectForm(forms.Form):
         help_text='model choice radioselect with to_field_name=codename', widget=forms.RadioSelect,
         queryset=Permission.objects.filter(content_type__app_label='frontend'),
         to_field_name='codename', empty_label=None)
+    field5 = forms.ChoiceField(
+        help_text='disabled', choices=CHOICES, widget=forms.RadioSelect,
+        disabled=True, required=False)
 
 
 class CheckboxSelectMultipleForm(forms.Form):
@@ -490,6 +527,9 @@ class CheckboxSelectMultipleForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         queryset=Permission.objects.filter(content_type__app_label__in=['auth', 'frontend']),
         to_field_name='codename')
+    field5 = forms.MultipleChoiceField(
+        help_text='default', choices=CHOICES, widget=forms.CheckboxSelectMultiple,
+        disabled=True, required=False)
 
     template = Template("""
     {% form %}
@@ -505,6 +545,8 @@ class FileInputForm(forms.Form):
         help_text='default', widget=forms.FileInput)
     field2 = forms.FileField(
         help_text='initial value', widget=forms.FileInput, initial=FakeFieldFile())
+    field3 = forms.FileField(
+        help_text='disabled', widget=forms.FileInput, disabled=True, required=False)
 
 
 class SplitHiddenDateTimeWidgetForm(forms.Form):
@@ -524,3 +566,5 @@ class SelectDateWidgetForm(forms.Form):
     field3 = forms.DateField(
         help_text='custom empty label', widget=SelectDateWidget(
             empty_label=("Choose Year", "Choose Month", "Choose Day")))
+    field4 = forms.DateField(
+        help_text='disabled', widget=SelectDateWidget, initial=timezone.now, disabled=True, required=False)
